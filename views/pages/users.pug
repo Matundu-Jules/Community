@@ -1,0 +1,12 @@
+extends ../layout.pug
+
+block nav
+  - var currentPage = 'users'
+
+block content
+  div.users
+    h1 All Users
+
+    each user in users
+      li= user.email
+      li= user.pseudo

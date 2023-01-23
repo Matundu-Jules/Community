@@ -1,5 +1,6 @@
 require('dotenv').config()
 require('./modules/scss-config')
+require('./queries/auth.queries')
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')

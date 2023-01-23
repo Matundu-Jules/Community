@@ -79,7 +79,7 @@ hr {
   color: var(--primary);
 }
 .header-navbar {
-  width: 15rem;
+  width: 20rem;
 }
 .header-navbar-menu {
   display: flex;
