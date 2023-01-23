@@ -1,0 +1,39 @@
+{
+  "overrides": [
+    {
+      "files": "*.js",
+      "options": {
+        "trailingComma": "es5",
+        "tabWidth": 4,
+        "semi": false,
+        "singleQuote": true
+      }
+    },
+    {
+      "files": "*.pug",
+      "options": {
+        "parser": "pug",
+        "plugins": ["@prettier/plugin-pug"],
+        "pugBracketSpacing": true,
+        "pugBracketSameLine": true,
+        "pugPrintWidth": 100,
+        "pugSemi": false,
+        "pugSingleQuote": true,
+        "pugTabWidth": 2,
+        "pugExplicitDiv": true
+      }
+    },
+    {
+      "files": "*.prettierrc",
+      "options": {
+        "parser": "json"
+      }
+    },
+    {
+      "files": "*.scss",
+      "options": {
+        "parser": "scss"
+      }
+    }
+  ]
+}

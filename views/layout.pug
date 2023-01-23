@@ -1,0 +1,27 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='css/main.css')
+    title Community
+  body
+
+  //- create variable for apply style on active link in header nav. 
+  block nav
+    - var currentPage = 'home'
+
+  //- Headers with navbar
+  include includes/header.pug
+
+  // Home content
+  div.home
+    block content
+
+  footer
+    div.container
+      p
+      | &copy; 2023 |
+      i.fa.fa-value(aria-hidden='true') &nbsp;
+      a(href='#') By Matundu Jules-Langa
