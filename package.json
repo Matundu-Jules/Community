@@ -23,7 +23,9 @@
     "express": "^4.18.2",
     "morgan": "^1.10.0",
     "pg": "^8.8.0",
-    "pug": "^3.0.2"
+    "pg-hstore": "^2.3.4",
+    "pug": "^3.0.2",
+    "sequelize": "^6.28.0"
   },
   "devDependencies": {
     "@prettier/plugin-pug": "^2.4.0",

@@ -1,66 +1,54 @@
 const bcrypt = require('bcrypt')
-
-const {
-    getUsersQuery,
-    emailVerify,
-    pseudoVerify,
-    createUser,
-} = require('../queries/auth.queries')
-
-// display all users
-exports.displayUsers = async (req, res, next) => {
-    try {
-        const users = await getUsersQuery()
-        console.log(users)
-        res.status(200).render('pages/users', { users })
-    } catch (err) {
-        next(err)
-    }
-}
+const User = require('../models/user.model')
+const { emailExistQuery, pseudoExistQuery } = require('../queries/auth.queries')
 
 // Create user
 exports.userSignup = async (req, res, next) => {
     try {
-        // data example : req.body
-        const newUser = {
-            pseudo: 'Jerrys',
-            email: 'jerry2@example.com',
-            password: '123',
-        }
-        // verify if email already exist
-        // const email = await emailVerify('jerry@example.com')
-        const email = await emailVerify(newUser.email)
-        const pseudo = await pseudoVerify(newUser.pseudo)
+        // check if pseudo/email already exist
+        const checkEmailExist = await emailExistQuery(req.body.email)
+        const checkPseudoExist = await pseudoExistQuery(req.body.pseudo)
 
-        console.log('pseudo: ', pseudo.length)
-
-        // errors strings
-        let emailAlreadyExist =
-            'Cet email est déja associé à un compte, veuillez en choisir un nouveau.'
-        let pseudoAlreadyExist =
-            'Cet pseudo est déja associé à un compte, veuillez en choisir un nouveau.'
-
-        if (email.length === 0 && pseudo.length === 0) {
-            res.render('pages/users', {
-                error: { email: emailAlreadyExist, pseudo: pseudoAlreadyExist },
+        if (checkEmailExist !== null && checkPseudoExist !== null) {
+            console.log(checkEmailExist.toJSON())
+            console.log(checkPseudoExist.toJSON())
+            return res.status(400).json({
+                userCreated: false,
+                errorPseudo:
+                    'Ce pseudo est déja pris, veuillez en choisir un nouveau.',
+                errorEmail: 'Cet email est déja associé à un compte !',
             })
-        } else if (email.length === 0)
-            res.render('pages/users', { error: { email: emailAlreadyExist } })
-        else if (pseudo.length === 0)
-            res.render('pages/users', { error: { pseudo: pseudoAlreadyExist } })
-
-        // Hash mdp
-        const salt = await bcrypt.genSalt(15)
-        const hash = await bcrypt.hash(newUser.password, salt)
-
-        // Create object for send user
-        const userHashed = {
-            ...newUser,
-            password: hash,
+        } else if (checkEmailExist !== null) {
+            console.log(checkEmailExist.toJSON())
+            return res.status(400).json({
+                userCreated: false,
+                errorEmail: 'Cet email est déja associé à un compte !',
+            })
+        } else if (checkPseudoExist !== null) {
+            console.log(checkPseudoExist.toJSON())
+            return res.status(400).json({
+                userCreated: false,
+                errorPseudo:
+                    'Ce pseudo est déja pris, veuillez en choisir un nouveau.',
+            })
         }
 
-        // create user in db
-        await createUser(userHashed)
+        console.log(checkPseudoExist)
+        console.log(checkEmailExist)
+
+        // hash password :
+        const salt = await bcrypt.genSalt(15)
+        const hash = await bcrypt.hash(req.body.password, salt)
+
+        // create user to db
+        const user = await User.create({
+            pseudo: req.body.pseudo,
+            email: req.body.email,
+            password: hash,
+        })
+
+        console.log(user.toJSON())
+
         res.status(201).json({
             userCreated: true,
             message:

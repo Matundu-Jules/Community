@@ -6,6 +6,8 @@ const express = require('express')
 const morgan = require('morgan')
 const app = express()
 
+// Connection PostgreSQL
+
 // views config
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
@@ -21,8 +23,11 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // routes
-const index = require('./routes')
-app.use(index)
+const authRoutes = require('./routes/auth.routes')
+app.use('/auth', authRoutes)
+app.get('/', (req, res) => {
+    res.render('home', { info: 'Build with node.js, express, postgreSQL.' })
+})
 
 // port
 const port = process.env.PORT || 80
