@@ -6,5 +6,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/users', authCtrl.displayUsers)
+// router.get('/users', authCtrl.userSignup)
+// router.post('/users', authCtrl.userSignup)
 
 module.exports = router

@@ -3,10 +3,25 @@ extends ../layout.pug
 block nav
   - var currentPage = 'users'
 
+//- Get all user Query
 block content
-  div.users
+  div.users-all
     h1 All Users
 
     each user in users
       li= user.email
       li= user.pseudo
+
+  //- Verify if email exist
+  //- div.users-verify
+  //-   - console.log(error)
+  //-   if (error.pseudo === [] && error.email === [])
+  //-     h1 verify user
+  //-     p= error.pseudo
+  //-     p= error.email
+  //-   else if error.pseudo === []
+  //-     h1 verify user pseudo
+  //-     p= error.pseudo
+  //-   else if error.email === []
+  //-     h1 verify user email
+  //-     p= error.email
