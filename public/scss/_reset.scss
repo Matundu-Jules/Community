@@ -33,14 +33,8 @@ p {
 
 a {
   font-size: 1.6rem;
-  color: var(--text-color);
+  color: var(--primary);
   text-decoration: none;
-  transition: all 0.2s;
-
-  &:hover {
-    color: var(--secondary);
-    font-weight: 700;
-  }
 }
 
 ul {

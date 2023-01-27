@@ -1,13 +1,14 @@
 header.header
-  a.header-logo(href='#')
-    img.header-img(src='/images/logo-community.png')
-  nav.header-navbar
-    ul.header-navbar-menu
-      li(class=`${currentPage === 'home' ? 'navbar-link active' : 'navbar-link'}`)
-        a.navbar-link(href=`${currentPage === 'home' ? '#' : process.env.URLWEBSITE}`) Home
-      li(class=`${currentPage === 'login' ? 'navbar-link active' : 'navbar-link'}`)
-        a.navbar-link(href='#') Log in
-      li(class=`${currentPage === 'signup' ? 'navbar-link active' : 'navbar-link'}`)
-        a.navbar-link(href='#') Sign up
-      li(class=`${currentPage === 'users' ? 'navbar-link active' : 'navbar-link'}`)
-        a.navbar-link(href='/users') Users
+  a.logo-link(href=`${currentPage === 'home' ? '#' : process.env.URLWEBSITE}`)
+    img.logo-img(src=`${process.env.IMAGESFOLDER}/logo-community.png`)
+  nav.navbar
+    a(
+      class=`${currentPage === 'home' ? 'navbar-item active' : 'navbar-item'}`,
+      href=`${currentPage === 'home' ? '#' : process.env.URLWEBSITE}`) Home
+    a(class=`${currentPage === 'login' ? 'navbar-item active' : 'navbar-item'}`, href='#') Log in
+    a(
+      class=`${currentPage === 'signup' ? 'navbar-item active' : 'navbar-item'}`,
+      href=`${currentPage === 'signup' ? '#' : `${process.env.URLWEBSITE}/auth/signup`}`) Sign up
+    a(
+      class=`${currentPage === 'post' ? 'navbar-item-post active' : 'navbar-item-post'}`,
+      href=`${currentPage === 'signup' ? '#' : `${process.env.URLWEBSITE}`}`) Post

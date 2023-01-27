@@ -33,13 +33,8 @@ p {
 
 a {
   font-size: 1.6rem;
-  color: var(--text-color);
+  color: var(--primary);
   text-decoration: none;
-  transition: all 0.2s;
-}
-a:hover {
-  color: var(--secondary);
-  font-weight: 700;
 }
 
 ul {
@@ -59,6 +54,22 @@ hr {
   color: var(--dark);
 }
 
+:root {
+  --primary: #003049;
+  --secondary: #d62828;
+  --ternary: #f77f00;
+  --gray-1: #20232a;
+  --gray-2: #efefef;
+  --dark: #333;
+  --background: #eae2b7;
+  --error: #e74c3c;
+  --font-family: "Lato", sans-serif;
+  --box-shadow: 0 6px 9px 0 rgb(0 0 0 / 15%);
+  --box-shadow-nav: rgb(0 0 0 / 22%) 0px 2px 18px 0px;
+  --text-color: #0a0f0d;
+  --menu-card: #0a0f0d;
+}
+
 /* HEADER */
 .header {
   height: 6rem;
@@ -68,31 +79,45 @@ hr {
   justify-content: space-between;
   align-items: center;
 }
-.header-logo {
+.header .logo-link {
   width: 7rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.header-logo-img {
+.header .logo-link .logo-img {
   width: 100%;
-  color: var(--primary);
 }
-.header-navbar {
-  width: 20rem;
-}
-.header-navbar-menu {
+.header .navbar {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  width: 30rem;
+  transition: 0.3s ease-in-out;
 }
-.header .navbar-link.active a {
+.header .navbar .navbar-item {
+  width: 6rem;
+}
+.header .navbar .navbar-item.active {
   color: var(--primary);
   font-weight: 700;
 }
-.header .navbar-link:hover {
+.header .navbar .navbar-item:hover {
   color: var(--primary);
+  font-weight: 700;
+}
+.header .navbar .navbar-item-post {
+  width: 6rem;
+  background: var(--primary);
+  color: var(--background);
+  font-weight: 400;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  transition: 0.4s ease-in-out;
+}
+.header .navbar .navbar-item-post:hover {
+  font-weight: 700;
 }
 
 /* HOME */
@@ -101,4 +126,25 @@ hr {
   align-items: center;
   justify-content: center;
   margin-top: 2rem;
+}
+
+/* POST-LIST */
+.post-list {
+  width: 100%;
+  max-width: 100rem;
+  display: flex;
+  flex-direction: row;
+  border: 0.1rem solid blue;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.profile-container {
+  width: 30%;
+  max-width: 30rem;
+}
+
+.posts-container {
+  flex: 1 1 auto;
 }
