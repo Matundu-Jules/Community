@@ -7,4 +7,8 @@ block content
   div.post-list
     div.profile-container
       include ../../includes/profile
-    div.posts-container posts
+    div.posts-container
+      if posts
+        each post in posts
+          div.card.post-item
+            div.card-body= post.content

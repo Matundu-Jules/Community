@@ -22,13 +22,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // routes
-const authRoutes = require('./routes/auth.routes')
-const postsRoutes = require('./routes/posts.routes')
-app.use('/auth', authRoutes)
-app.use('/post', postsRoutes)
-app.get('/', (req, res) => {
-    res.render('home')
-})
+const routing = require('./routes')
+app.use(routing)
 
 // port
 const port = process.env.PORT || 80

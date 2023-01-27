@@ -52,7 +52,7 @@ const User = sequelize.define(
             validate: {
                 len: {
                     args: [8, 60],
-                    msg: 'Le mot de passe doit contenir entre 8 et 30 caractères',
+                    msg: 'Le mot de passe doit contenir entre 8 et 60 caractères',
                 },
                 notEmpty: { msg: 'Vous devez renseigner un mot de passe' },
                 containSpace(value) {
@@ -69,5 +69,13 @@ const User = sequelize.define(
         tableName: 'Users',
     }
 )
+
+User.sync({ alter: true })
+    .then(() => {
+        console.log('User Model sync')
+    })
+    .catch((err) => {
+        next(err)
+    })
 
 module.exports = User

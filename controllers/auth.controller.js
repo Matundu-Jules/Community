@@ -3,7 +3,7 @@ const User = require('../models/user.model')
 const { emailExistQuery, pseudoExistQuery } = require('../queries/auth.queries')
 
 // Create user
-exports.userSignup = async (req, res, next) => {
+exports.authSignup = async (req, res, next) => {
     /* ERROR HANDLER */
     let errorsSignup = {
         pseudo: '',

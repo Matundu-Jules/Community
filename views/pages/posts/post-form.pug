@@ -1,0 +1,19 @@
+extends ../../layout.pug
+
+block nav
+  - var currentPage = 'post-form'
+
+block content
+  div.post-form
+    div.profile-container
+      include ../../includes/profile
+    div.post-form-container
+      form.post-form.post-form.card(method='post', action='/posts/')
+        div.card-header Écrire un post
+        div.card-body
+          div.post-form-textarea-container
+            textarea.form-control(name='content', placeholder='What is happening') 
+          if errors
+            p.error= errors
+          div.post-form-input-container
+            input(type='submit', value='Send', class='')
