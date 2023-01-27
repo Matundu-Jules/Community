@@ -1,6 +1,5 @@
 require('dotenv').config()
 require('./config/scss.config')
-require('./queries/auth.queries')
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
@@ -24,9 +23,11 @@ app.use(express.urlencoded({ extended: true }))
 
 // routes
 const authRoutes = require('./routes/auth.routes')
+const postsRoutes = require('./routes/posts.routes')
 app.use('/auth', authRoutes)
+app.use('/post', postsRoutes)
 app.get('/', (req, res) => {
-    res.render('pages/posts/post-list')
+    res.render('home')
 })
 
 // port

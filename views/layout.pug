@@ -7,21 +7,18 @@ html(lang='en')
     link(rel='stylesheet', href=`${process.env.CSSFOLDER}/main.css`)
     title Community
   body
+    div.container 
+      |
+      //- create variable for apply style on active link in header nav. 
+      block nav
+        - var currentPage = 'home'
 
-  //- create variable for apply style on active link in header nav. 
-  block nav
-    - var currentPage = 'home'
+      //- Headers with navbar
+      include includes/header.pug
 
-  //- Headers with navbar
-  include includes/header.pug
+      // Home content
+      div.home
+        block content
 
-  // Home content
-  div.home
-    block content
-
-  footer
-    div.container
-      p
-      | &copy; 2023 |
-      i.fa.fa-value(aria-hidden='true') &nbsp;
-      a(href='#') By Matundu Jules-Langa
+      //- Footer
+      include includes/footer.pug

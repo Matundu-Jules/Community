@@ -2,6 +2,21 @@
 @use "./variables.scss";
 @use "./mixins";
 
+/* GENERAL */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ERRORS */
+.error {
+  color: var(-error);
+  text-align: center;
+}
+
 /* HEADER */
 .header {
   height: 6rem;
@@ -63,10 +78,6 @@
 
 /* HOME */
 .home {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2rem;
 }
 
 /* POST-LIST */
@@ -88,4 +99,35 @@
 
 .posts-container {
   flex: 1 1 auto;
+}
+
+/* SIGNUP */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4rem;
+
+  .signup-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+
+    .signup-input {
+      padding: 0.7rem 0.5rem;
+      border: 1px solid var(--primary);
+      border-radius: 1rem;
+    }
+  }
+}
+
+/* FOOTER */
+footer {
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

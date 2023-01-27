@@ -5,10 +5,12 @@ header.header
     a(
       class=`${currentPage === 'home' ? 'navbar-item active' : 'navbar-item'}`,
       href=`${currentPage === 'home' ? '#' : process.env.URLWEBSITE}`) Home
-    a(class=`${currentPage === 'login' ? 'navbar-item active' : 'navbar-item'}`, href='#') Log in
+    a(
+      class=`${currentPage === 'login' ? 'navbar-item active' : 'navbar-item'}`,
+      href=`${currentPage === 'login' ? '#' : `${process.env.URLWEBSITE}/auth/login`}`) Log in
     a(
       class=`${currentPage === 'signup' ? 'navbar-item active' : 'navbar-item'}`,
       href=`${currentPage === 'signup' ? '#' : `${process.env.URLWEBSITE}/auth/signup`}`) Sign up
     a(
-      class=`${currentPage === 'post' ? 'navbar-item-post active' : 'navbar-item-post'}`,
-      href=`${currentPage === 'signup' ? '#' : `${process.env.URLWEBSITE}`}`) Post
+      class=`${currentPage === 'post-list' ? 'navbar-item-post active' : 'navbar-item-post'}`,
+      href=`${currentPage === 'post-list' ? '#' : `${process.env.URLWEBSITE}/post/new`}`) Post

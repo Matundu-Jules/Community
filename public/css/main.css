@@ -45,15 +45,6 @@ img {
   max-width: 100%;
 }
 
-hr {
-  border: 0;
-  border-bottom: 1px solid var(--gray);
-}
-
-::placeholder {
-  color: var(--dark);
-}
-
 :root {
   --primary: #003049;
   --secondary: #d62828;
@@ -61,13 +52,28 @@ hr {
   --gray-1: #20232a;
   --gray-2: #efefef;
   --dark: #333;
-  --background: #eae2b7;
-  --error: #e74c3c;
+  --background: #faf9f6;
+  --error: #d62828;
   --font-family: "Lato", sans-serif;
   --box-shadow: 0 6px 9px 0 rgb(0 0 0 / 15%);
   --box-shadow-nav: rgb(0 0 0 / 22%) 0px 2px 18px 0px;
   --text-color: #0a0f0d;
   --menu-card: #0a0f0d;
+}
+
+/* GENERAL */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ERRORS */
+.error {
+  color: var(-error);
+  text-align: center;
 }
 
 /* HEADER */
@@ -121,13 +127,6 @@ hr {
 }
 
 /* HOME */
-.home {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2rem;
-}
-
 /* POST-LIST */
 .post-list {
   width: 100%;
@@ -147,4 +146,33 @@ hr {
 
 .posts-container {
   flex: 1 1 auto;
+}
+
+/* SIGNUP */
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4rem;
+}
+.signup-form .signup-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+.signup-form .signup-input-container .signup-input {
+  padding: 0.7rem 0.5rem;
+  border: 1px solid var(--primary);
+  border-radius: 1rem;
+}
+
+/* FOOTER */
+footer {
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
