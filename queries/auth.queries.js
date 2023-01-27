@@ -6,6 +6,6 @@ exports.emailExistQuery = (email) => {
 }
 
 // verify if pseudo is already exist
-exports.pseudoExistQuery = async (pseudo) => {
+exports.pseudoExistQuery = (pseudo) => {
     return User.findOne({ where: { pseudo: pseudo } })
 }

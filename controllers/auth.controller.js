@@ -4,37 +4,35 @@ const { emailExistQuery, pseudoExistQuery } = require('../queries/auth.queries')
 
 // Create user
 exports.userSignup = async (req, res, next) => {
+    /* ERROR HANDLER */
+    let errorsSignup = {
+        pseudo: '',
+        email: '',
+        password: '',
+    }
+
     try {
         // check if pseudo/email already exist
         const checkEmailExist = await emailExistQuery(req.body.email)
         const checkPseudoExist = await pseudoExistQuery(req.body.pseudo)
 
         if (checkEmailExist !== null && checkPseudoExist !== null) {
-            console.log(checkEmailExist.toJSON())
-            console.log(checkPseudoExist.toJSON())
-            return res.status(400).json({
-                userCreated: false,
-                errorPseudo:
-                    'Ce pseudo est déja pris, veuillez en choisir un nouveau.',
-                errorEmail: 'Cet email est déja associé à un compte !',
+            errorsSignup.pseudo = 'Ce pseudo est déja pris'
+            errorsSignup.email = 'Cet email est déja associé à un compte'
+            res.status(400).render('pages/auth/signup', {
+                errors: errorsSignup,
             })
         } else if (checkEmailExist !== null) {
-            console.log(checkEmailExist.toJSON())
-            return res.status(400).json({
-                userCreated: false,
-                errorEmail: 'Cet email est déja associé à un compte !',
+            errorsSignup.email = 'Cet email est déja associé à un compte'
+            res.status(400).render('pages/auth/signup', {
+                errors: errorsSignup,
             })
         } else if (checkPseudoExist !== null) {
-            console.log(checkPseudoExist.toJSON())
-            return res.status(400).json({
-                userCreated: false,
-                errorPseudo:
-                    'Ce pseudo est déja pris, veuillez en choisir un nouveau.',
+            errorsSignup.pseudo = 'Ce pseudo est déja pris'
+            res.status(400).render('pages/auth/signup', {
+                errors: errorsSignup,
             })
         }
-
-        console.log(checkPseudoExist)
-        console.log(checkEmailExist)
 
         // hash password :
         const salt = await bcrypt.genSalt(15)
@@ -47,14 +45,21 @@ exports.userSignup = async (req, res, next) => {
             password: hash,
         })
 
-        console.log(user.toJSON())
-
-        res.status(201).json({
-            userCreated: true,
-            message:
-                'Votre compte a bien été créer. \nVeuillez vous connecter.',
-        })
+        res.status(201).redirect('/')
     } catch (err) {
-        next(err)
+        err.errors.map((key) => {
+            if (key.path === 'pseudo') {
+                errorsSignup.pseudo = key.message
+                console.log('PSEUDO : ', key.message)
+            } else if (key.path === 'email') {
+                errorsSignup.email = key.message
+                console.log('EMAIL : ', key.message)
+            } else if (key.path === 'password') {
+                errorsSignup.password = key.message
+                console.log('PASSWORD : ', key.message)
+            }
+        })
+
+        res.status(400).render('pages/auth/signup', { errors: errorsSignup })
     }
 }

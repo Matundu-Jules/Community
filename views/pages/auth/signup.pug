@@ -25,4 +25,7 @@ block content
         p.error= errors.password
 
     div.signup-submit-container
-      input.signup-submit-btn(type='submit', value='submit', `${if, (errors), disabledtrue}`)
+      - var disabled = false
+      input.signup-submit-btn(type='submit', value='submit')
+
+//- disabled=errors ? '' : null
