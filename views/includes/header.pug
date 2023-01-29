@@ -3,8 +3,8 @@ header.header
     img.logo-img(src=`${process.env.IMAGESFOLDER}/logo-community.png`)
   nav.navbar
     a(
-      class=`${currentPage === 'home' ? 'navbar-item active' : 'navbar-item'}`,
-      href=`${currentPage === 'home' ? '#' : process.env.URLWEBSITE}`) Home
+      class=`${currentPage === 'home' || currentPage === 'post-list' ? 'navbar-item active' : 'navbar-item'}`,
+      href=`${currentPage === 'home' || currentPage === 'post-list' ? '#' : process.env.URLWEBSITE}`) Home
     a(
       class=`${currentPage === 'login' ? 'navbar-item active' : 'navbar-item'}`,
       href=`${currentPage === 'login' ? '#' : `${process.env.URLWEBSITE}/auth/login`}`) Log in
@@ -12,5 +12,5 @@ header.header
       class=`${currentPage === 'signup' ? 'navbar-item active' : 'navbar-item'}`,
       href=`${currentPage === 'signup' ? '#' : `${process.env.URLWEBSITE}/auth/signup`}`) Sign up
     a(
-      class=`${currentPage === 'post-list' ? 'navbar-item-post active' : 'navbar-item-post'}`,
-      href=`${currentPage === 'post-list' ? '#' : `${process.env.URLWEBSITE}/posts/new`}`) Post
+      class=`${currentPage === 'post-form' ? 'navbar-item-post active' : 'navbar-item-post'}`,
+      href=`${currentPage === 'post-form' ? '#' : `${process.env.URLWEBSITE}/posts/new`}`) Post

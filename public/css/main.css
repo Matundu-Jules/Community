@@ -102,31 +102,31 @@ img {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 30rem;
   transition: 0.3s ease-in-out;
 }
 .header .navbar .navbar-item {
-  width: 6rem;
+  margin-left: 1rem;
+  transition: 0.2s ease-in-out;
 }
 .header .navbar .navbar-item.active {
   color: var(--primary);
   font-weight: 700;
 }
 .header .navbar .navbar-item:hover {
-  color: var(--primary);
-  font-weight: 700;
+  text-shadow: 0 0 1rem rgba(0, 48, 73, 0.5);
 }
 .header .navbar .navbar-item-post {
-  width: 6rem;
+  text-align: center;
   background: var(--primary);
   color: var(--background);
   font-weight: 400;
   border-radius: 0.5rem;
   padding: 0.8rem 1.5rem;
-  transition: 0.4s ease-in-out;
+  margin-left: 1rem;
+  transition: 0.2s ease-in-out;
 }
 .header .navbar .navbar-item-post:hover {
-  font-weight: 700;
+  text-shadow: 0 0 1rem rgba(250, 249, 246, 0.5);
 }
 
 /* HOME */

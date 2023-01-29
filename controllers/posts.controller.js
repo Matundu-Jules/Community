@@ -1,7 +1,7 @@
 const Post = require('../models/post.model')
 const { postGetAllQuery } = require('../queries/post.queries')
 
-// Create user
+// Create post
 exports.postCreate = async (req, res, next) => {
     /* ERROR HANDLER */
     let errorsPostCreate = ''
@@ -31,6 +31,8 @@ exports.postCreate = async (req, res, next) => {
         }
     }
 }
+
+exports.postForm = (req, res) => res.render('pages/posts/post-form')
 
 exports.postGetAll = async (req, res, next) => {
     try {

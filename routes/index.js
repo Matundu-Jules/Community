@@ -8,7 +8,7 @@ router.use('/posts', posts)
 
 // Homepage
 router.get('/', (req, res) => {
-    res.render('home')
+    res.redirect('/posts')
 })
 
 module.exports = router

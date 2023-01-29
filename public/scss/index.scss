@@ -46,12 +46,12 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 30rem;
+    // width: 36rem;
     transition: 0.3s ease-in-out;
 
     .navbar-item {
-      width: 6rem;
-      // text-align: center;
+      margin-left: 1rem;
+      transition: 0.2s ease-in-out;
 
       &.active {
         color: var(--primary);
@@ -59,21 +59,20 @@
       }
 
       &:hover {
-        color: var(--primary);
-        font-weight: 700;
+        text-shadow: 0 0 1rem rgba(#003049, 0.5);
       }
       &-post {
-        width: 6rem;
-        // text-align: left;
+        text-align: center;
         background: var(--primary);
         color: var(--background);
         font-weight: 400;
         border-radius: 0.5rem;
         padding: 0.8rem 1.5rem;
-        transition: 0.4s ease-in-out;
+        margin-left: 1rem;
+        transition: 0.2s ease-in-out;
 
         &:hover {
-          font-weight: 700;
+          text-shadow: 0 0 1rem rgba(#faf9f6, 0.5);
         }
       }
     }
