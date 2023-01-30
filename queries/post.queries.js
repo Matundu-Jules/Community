@@ -4,3 +4,7 @@ const Post = require('../models/post.model')
 exports.postGetAllQuery = () => {
     return Post.findAll()
 }
+
+exports.createPost = (post) => {
+    return Post.create(post)
+}

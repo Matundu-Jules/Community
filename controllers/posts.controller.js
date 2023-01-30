@@ -1,5 +1,5 @@
 const Post = require('../models/post.model')
-const { postGetAllQuery } = require('../queries/post.queries')
+const { postGetAllQuery, createPost } = require('../queries/post.queries')
 
 // Create post
 exports.postCreate = async (req, res, next) => {
@@ -8,27 +8,15 @@ exports.postCreate = async (req, res, next) => {
 
     try {
         const body = req.body
-        const newPost = await Post.create(body)
+        await createPost(body)
 
         res.redirect('/')
     } catch (err) {
-        if (err.errors) {
-            err.errors.map((key) => {
-                if (key.path === 'content') {
-                    errorsPostCreate = key.message
-                    console.log('errorsPostCreate : ', key.message)
-                }
-            })
-
-            res.status(400).render('pages/posts/post-form', {
-                errors: errorsPostCreate,
-            })
-        } else {
-            console.log(err)
-            res.status(400).render('pages/posts/post-form', {
-                errors: 'Test',
-            })
-        }
+        const errors = Object.keys(err.errors).map(
+            (key) => err.errors[key].message
+        )
+        console.log(errors)
+        res.status(400).render('pages/posts/post-form', { errors })
     }
 }
 

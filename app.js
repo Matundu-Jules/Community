@@ -3,6 +3,7 @@ require('./config/scss.config')
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
+const errorHandler = require('errorhandler')
 const app = express()
 
 // Connection PostgreSQL
@@ -24,6 +25,20 @@ app.use(express.urlencoded({ extended: true }))
 // routes
 const routing = require('./routes')
 app.use(routing)
+
+// development config
+if (process.env.NODE_ENV === 'development') {
+    app.use(errorHandler())
+} else {
+    // in production return only errors for users
+    app.use((err, req, res, next) => {
+        const code = err.code || 500
+        res.status(code).json({
+            code: code,
+            message: code === 500 ? null : err.message,
+        })
+    })
+}
 
 // port
 const port = process.env.PORT || 80
