@@ -33,7 +33,7 @@ exports.postCreate = async (req, res, next) => {
 }
 
 // crtl : delete post
-exports.deletePost = async (req, res, next) => {
+exports.postDelete = async (req, res, next) => {
     try {
         const postId = req.params.postId
         await deletePost(postId)
