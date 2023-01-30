@@ -1,14 +1,15 @@
 const {
     postCreate,
-    postGetAll,
+    postList,
     postForm,
     postDelete,
+    postGetAll,
 } = require('../controllers/posts.controller')
 
 const router = require('express').Router()
 
 // Routing pug
-router.get('/', postGetAll)
+router.get('/', postList)
 router.get('/new', postForm)
 
 // API

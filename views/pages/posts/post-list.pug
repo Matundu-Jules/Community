@@ -1,14 +1,9 @@
-extends ../../layout.pug
-
 block nav
   - var currentPage = 'post-list'
 
-block content
-  div.post-list
-    div.profile-container
-      include ../../includes/profile
-    div.posts-container
-      if posts
-        each post in posts
-          div.card.post-item
-            div.card-body= post.content
+if posts
+  each post in posts
+    div.card.post-item
+      div.card-body
+        div.card-text= post.content
+        button.btn.btn-delete.btn-delete-post(post_id=post.id) x

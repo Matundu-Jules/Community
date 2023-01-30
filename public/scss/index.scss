@@ -1,5 +1,6 @@
 @use "./reset";
-@use "./variables.scss";
+@use "./variables";
+@use "./components";
 @use "./mixins";
 
 /* GENERAL */
@@ -9,15 +10,6 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-}
-
-/* ERRORS */
-.error {
-  color: var(--error);
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin: 0.5rem 0 0 0;
 }
 
 /* HEADER */
@@ -86,8 +78,8 @@
   }
 }
 
-/* POST-LIST */
-.post-list {
+/* POST */
+.post-container {
   width: 100%;
   max-width: 100rem;
   display: flex;
@@ -97,7 +89,7 @@
   margin-top: 2rem;
 }
 
-.posts-container {
+#post-list-container {
   flex: 1 1 auto;
 }
 
@@ -109,6 +101,17 @@
 
   &:last-child {
     border-bottom: 0.2rem solid var(--text-color);
+  }
+
+  .card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .btn-delete-post {
+    height: 3rem;
+    float: right;
   }
 }
 

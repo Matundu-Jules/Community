@@ -1,0 +1,12 @@
+extends ../../layout.pug
+
+block nav
+  - var currentPage = 'post'
+
+block content
+  script(src=`${process.env.JSFOLDERPOST}/post.js`)
+  div.post-container
+    div.profile-container
+      include ../../includes/profile
+    div#post-list-container
+      include post-list.pug

@@ -60,15 +60,6 @@ img {
   --menu-card: #0a0f0d;
 }
 
-/* GENERAL */
-.container {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
 /* ERRORS */
 .error {
   color: var(--error);
@@ -76,6 +67,37 @@ img {
   font-size: 1.2rem;
   font-weight: 700;
   margin: 0.5rem 0 0 0;
+}
+
+/* BUTTONS */
+.btn {
+  border-radius: 0.8rem;
+  cursor: pointer;
+}
+.btn-delete {
+  background-color: var(--error);
+  color: var(--background);
+  border: 0.2rem solid var(--error);
+}
+.btn-delete-post {
+  height: auto;
+  padding: 0.2rem 0.9rem;
+  border-radius: 6rem;
+  line-height: 2rem;
+  transition-duration: 0.4s;
+}
+.btn-delete-post:hover {
+  background-color: var(--background);
+  color: var(--error);
+}
+
+/* GENERAL */
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* HEADER */
@@ -134,8 +156,8 @@ img {
   text-align: center;
 }
 
-/* POST-LIST */
-.post-list {
+/* POST */
+.post-container {
   width: 100%;
   max-width: 100rem;
   display: flex;
@@ -145,7 +167,7 @@ img {
   margin-top: 2rem;
 }
 
-.posts-container {
+#post-list-container {
   flex: 1 1 auto;
 }
 
@@ -157,6 +179,15 @@ img {
 }
 .post-item:last-child {
   border-bottom: 0.2rem solid var(--text-color);
+}
+.post-item .card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.post-item .btn-delete-post {
+  height: 3rem;
+  float: right;
 }
 
 /* POST-FORM */

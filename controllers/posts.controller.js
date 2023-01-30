@@ -1,13 +1,15 @@
-const Post = require('../models/post.model')
-const { postGetAllQuery, createPost } = require('../queries/post.queries')
-const { post } = require('../routes/posts.routes')
+const {
+    getAllPostQuery,
+    createPostQuery,
+    deletePostQuery,
+} = require('../queries/post.queries')
 
 // pug : display all posts
-exports.postGetAll = async (req, res, next) => {
+exports.postList = async (req, res, next) => {
     try {
-        const posts = await postGetAllQuery()
+        const posts = await getAllPostQuery()
 
-        res.render('pages/posts/post-list', { posts })
+        res.render('pages/posts/post', { posts })
     } catch (err) {
         next(err)
     }
@@ -20,15 +22,16 @@ exports.postForm = (req, res) => res.render('pages/posts/post-form')
 exports.postCreate = async (req, res, next) => {
     try {
         const newPost = req.body
-        await createPost(newPost)
+        await createPostQuery(newPost)
 
         res.redirect('/')
     } catch (err) {
         const errors = Object.keys(err.errors).map(
             (key) => err.errors[key].message
         )
-        console.log(errors)
         res.status(400).render('pages/posts/post-form', { errors })
+        // console.log(err)
+        // res.status(400).render('pages/posts/post-form', { errors: err })
     }
 }
 
@@ -36,9 +39,13 @@ exports.postCreate = async (req, res, next) => {
 exports.postDelete = async (req, res, next) => {
     try {
         const postId = req.params.postId
-        await deletePost(postId)
-        res.end()
+        const result = await deletePostQuery(postId)
+        console.log(result)
+
+        const posts = await getAllPostQuery()
+        res.render('pages/posts/post-list', { posts })
     } catch (err) {
+        console.log(err)
         next(err)
     }
 }

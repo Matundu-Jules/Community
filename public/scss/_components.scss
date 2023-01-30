@@ -1,0 +1,33 @@
+/* ERRORS */
+.error {
+  color: var(--error);
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0.5rem 0 0 0;
+}
+
+/* BUTTONS */
+.btn {
+  border-radius: 0.8rem;
+  cursor: pointer;
+
+  &-delete {
+    background-color: var(--error);
+    color: var(--background);
+    border: 0.2rem solid var(--error);
+
+    &-post {
+      height: auto;
+      padding: 0.2rem 0.9rem;
+      border-radius: 6rem;
+      line-height: 2rem;
+      transition-duration: 0.4s;
+
+      &:hover {
+        background-color: var(--background);
+        color: var(--error);
+      }
+    }
+  }
+}

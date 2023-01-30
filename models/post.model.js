@@ -5,6 +5,11 @@ const sequelize = require('../config/postgresql.config')
 const Post = sequelize.define(
     'Post',
     {
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true,
+        },
         content: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -29,7 +34,8 @@ Post.sync({ alter: true })
         console.log('Post Model sync')
     })
     .catch((err) => {
-        next(err)
+        console.error(err)
+        throw new Error('post model not sync')
     })
 
 module.exports = Post
