@@ -2,4 +2,5 @@ node_modules
 features.txt
 steps.txt
 .env
+.vscode
 example.js
