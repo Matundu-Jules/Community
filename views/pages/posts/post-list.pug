@@ -5,5 +5,5 @@ if posts
   each post in posts
     div.card.post-item
       div.card-body
-        div.card-text= post.content
+        a.card-text(href='/posts/edit/' + post.id)= post.content
         button.btn.btn-delete.btn-delete-post(post_id=post.id) x

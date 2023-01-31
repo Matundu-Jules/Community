@@ -4,16 +4,17 @@ block nav
   - var currentPage = 'post-form'
 
 block content
-  div.post-form
+  div.post-container
     div.profile-container
       include ../../includes/profile
     div.post-form-container
-      form.post-form.post-form.card(method='post', action='/posts/')
-        div.card-header Écrire un post
+      form.post-form.card(method='post', action=post.id ? '/posts/update/' + post.id : '/posts/')
+        div.card-header
+          label.form-control-label(for='form-control') Écrire un post
         div.card-body
           div.post-form-textarea-container
-            textarea.form-control(name='content', placeholder='What is happening')
+            textarea#form-control(name='content', placeholder='What is happening', autofocus)= post.content
           if errors
             p.error= errors
-          div.post-form-input-container
-            input(type='submit', value='Send', class='')
+          div.post-form-btn-container
+            input.btn.btn-edit-post(type='submit', value='Send')

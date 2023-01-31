@@ -12,3 +12,10 @@ exports.createPostQuery = (post) => {
 exports.deletePostQuery = (postId) => {
     return Post.destroy({ where: { id: postId } })
 }
+
+exports.getPostQuery = (postId) => {
+    return Post.findByPk(postId)
+}
+exports.updatePostQuery = (postId, post) => {
+    return Post.update({ content: post.content }, { where: { id: postId } })
+}
