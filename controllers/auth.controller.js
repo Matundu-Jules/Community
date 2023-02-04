@@ -39,7 +39,7 @@ exports.authSignup = async (req, res, next) => {
         const hash = await bcrypt.hash(req.body.password, salt)
 
         // create user to db
-        const user = await User.create({
+        await User.create({
             pseudo: req.body.pseudo,
             email: req.body.email,
             password: hash,

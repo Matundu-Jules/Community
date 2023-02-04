@@ -6,11 +6,12 @@ const morgan = require('morgan')
 const errorHandler = require('errorhandler')
 const app = express()
 
-// Connection PostgreSQL
-
 // views config
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
+
+// sessions config
+require('./config/session.config')
 
 // http request logger
 app.use(morgan('dev'))
