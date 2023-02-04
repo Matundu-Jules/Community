@@ -1,78 +1,90 @@
-const { DataTypes } = require('sequelize')
+const { DataTypes, Model } = require('sequelize')
+const bcrypt = require('bcrypt')
 const sequelize = require('../config/postgresql.config')
 
-// create User model
-const User = sequelize.define(
-    'User',
+// create User class extends Model
+class User extends Model {
+    comparePassword(password) {
+        return bcrypt.compare(password, this.local.password)
+    }
+
+    static async hashPassword(password) {
+        try {
+            const salt = await bcrypt.salt(10)
+            return bcrypt.hash(password, salt)
+        } catch (err) {
+            throw err
+        }
+    }
+}
+
+User.init(
     {
-        pseudo: {
+        username: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
+
             validate: {
                 len: {
-                    args: [4, 20],
-                    msg: 'Le pseudo doit contenir entre 4 et 20 caractères',
+                    args: [2, 50],
+                    msg: 'Username must be between 4 and 20 characters',
                 },
                 notEmpty: {
-                    msg: 'Vous devez choisir un pseudo',
-                },
-                containSpace(value) {
-                    if (value.indexOf(' ') >= 0) {
-                        throw new Error(
-                            "Le pseudo ne peux pas contenir d'espace"
-                        )
-                    } else return 0
+                    msg: 'You must choose a username',
                 },
             },
         },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-            validate: {
-                len: {
-                    args: [8, 50],
-                    msg: "L'email doit contenir entre 8 et 50 caractères",
-                },
-                notEmpty: {
-                    msg: 'Un email est nécessaire pour vous inscrire',
-                },
-                isEmail: { msg: 'Veuillez entrer un email valide' },
-                containSpace(value) {
-                    if (value.indexOf(' ') >= 0) {
-                        throw new Error("L'email ne peux pas contenir d'espace")
-                    }
+        local: {
+            type: DataTypes.JSON,
+
+            email: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                unique: true,
+
+                validate: {
+                    len: {
+                        args: [8, 50],
+                        msg: 'Email must be between 8 and 50 characters',
+                    },
+
+                    notEmpty: {
+                        msg: 'Email is required to register',
+                    },
+
+                    isEmail: { msg: 'Please enter a valid email' },
                 },
             },
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: {
-                    args: [8, 60],
-                    msg: 'Le mot de passe doit contenir entre 8 et 60 caractères',
+            password: {
+                type: DataTypes.STRING,
+                allowNull: false,
+
+                get() {
+                    return this.getDataValue('email')
                 },
-                notEmpty: { msg: 'Vous devez renseigner un mot de passe' },
-                containSpace(value) {
-                    if (value.indexOf(' ') >= 0) {
-                        throw new Error(
-                            "Le mot de passe ne peux pas contenir d'espace"
-                        )
-                    }
+
+                validate: {
+                    len: {
+                        args: [8, 20],
+                        msg: 'Password must be between 8 and 60 characters',
+                    },
+
+                    notEmpty: { msg: 'You must enter a password' },
                 },
             },
         },
     },
     {
+        sequelize,
         tableName: 'Users',
+        modelName: 'User',
     }
 )
 
 User.sync({ alter: true })
     .then(() => {
-        console.log('User Model sync')
+        console.log('user model sync')
     })
     .catch((err) => {
         next(err)
