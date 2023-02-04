@@ -4,14 +4,17 @@ const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
 const errorHandler = require('errorhandler')
+
+// create/export express app
 const app = express()
+exports.app = app
+
+// sessions config
+require('./config/session.config')
 
 // views config
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
-
-// sessions config
-require('./config/session.config')
 
 // http request logger
 app.use(morgan('dev'))
