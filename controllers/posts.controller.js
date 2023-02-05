@@ -36,9 +36,11 @@ exports.postDelete = async (req, res, next) => {
 exports.postForm = (req, res) => {
     res.render('pages/posts/post-form', { post: {} })
 }
+
 exports.postCreate = async (req, res, next) => {
     try {
         const newPost = req.body
+        newPost.content.trim()
         await createPostQuery(newPost)
 
         res.redirect('/')
@@ -46,7 +48,7 @@ exports.postCreate = async (req, res, next) => {
         const errors = Object.keys(err.errors).map(
             (key) => err.errors[key].message
         )
-        res.status(400).render('pages/posts/post-form', { errors })
+        res.status(403).render('pages/posts/post-form', { post: {}, errors })
     }
 }
 

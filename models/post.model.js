@@ -16,10 +16,11 @@ const Post = sequelize.define(
             validate: {
                 len: {
                     args: [1, 140],
-                    msg: '140 caractères maximum',
+                    msg: '140 characters maximum',
                 },
                 notEmpty: {
-                    msg: 'Vous devez saisir un post',
+                    args: true,
+                    msg: 'You must enter a post',
                 },
             },
         },
@@ -35,7 +36,7 @@ Post.sync({ alter: true })
     })
     .catch((err) => {
         console.error(err)
-        throw new Error('post model not sync')
+        throw err
     })
 
 module.exports = Post

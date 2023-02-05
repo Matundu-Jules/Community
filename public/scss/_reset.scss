@@ -52,12 +52,20 @@ textarea {
     box-shadow: 0 0 6px var(--primary);
   }
 }
+input {
+  background: var(--background);
 
-// hr {
-//   border: 0;
-//   border-bottom: 1px solid var(--gray);
-// }
+  &:focus {
+    outline: none !important;
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 6px var(--primary);
+  }
+}
 
-// ::placeholder {
-//   color: var(--dark);
-// }
+hr {
+  width: 80%;
+  height: 0%;
+  border: 0;
+  border-bottom: 2px solid var(--primary);
+  margin-bottom: 2rem;
+}

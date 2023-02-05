@@ -8,13 +8,8 @@ class User extends Model {
         return bcrypt.compare(password, this.local.password)
     }
 
-    static async hashPassword(password) {
-        try {
-            const salt = await bcrypt.salt(10)
-            return bcrypt.hash(password, salt)
-        } catch (err) {
-            throw err
-        }
+    static hashPassword(password) {
+        return bcrypt.hash(password, 12)
     }
 }
 
@@ -88,7 +83,7 @@ User.sync({ alter: true })
         console.log('user model sync')
     })
     .catch((err) => {
-        next(err)
+        throw err
     })
 
 module.exports = User

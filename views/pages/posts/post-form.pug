@@ -6,15 +6,17 @@ block nav
 block content
   div.post-container
     div.profile-container
-      include ../../includes/profile
+      include ../users/profile
     div.post-form-container
       form.post-form.card(method='post', action=post.id ? '/posts/update/' + post.id : '/posts/')
-        div.card-header
+        div.post-form-textarea-container
           label.form-control-label(for='form-control') Écrire un post
-        div.card-body
-          div.post-form-textarea-container
-            textarea#form-control(name='content', placeholder='What is happening', autofocus)= post.content
+          textarea#form-control.post-form-textarea(
+            name='content',
+            placeholder='What is happening',
+            autofocus)= post.content
           if errors
-            p.error= errors
+            each error in errors
+              p.error= error
           div.post-form-btn-container
-            input.btn.btn-edit-post(type='submit', value='Send')
+            input.btn.btn-primary(type='submit', value='Send')

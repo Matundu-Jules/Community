@@ -1,23 +1,10 @@
-const { authSignup } = require('../controllers/auth.controller')
-
 const router = require('express').Router()
-
-// maybe add module yup validations in folder validations/userValidation.js for check signin/signup forms
+const { signupForm, signup } = require('../controllers/auth.controller')
 
 // Routing pug
-// GET : signup form
-router.get('/signup', (req, res) => {
-    res.render('pages/auth/signup')
-})
-// GET : login form
-router.get('/login', (req, res) => {
-    res.render('pages/auth/login')
-})
+router.get('/signup/form', signupForm)
 
-// POST : signup
-router.post('/signup', authSignup)
-
-// POST : Connection
-// router.post('/login', authCtrl.userLogin)
+// API
+router.post('/signup', signup)
 
 module.exports = router
