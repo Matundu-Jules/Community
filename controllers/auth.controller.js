@@ -6,6 +6,7 @@ let errorsSignup = {
     password: '',
 }
 
+/* SIGNUP */
 exports.signupForm = (req, res, next) => {
     res.render('pages/auth/signup-form', { errors: null })
 }
@@ -28,4 +29,18 @@ exports.signup = async (req, res, next) => {
 
         res.render('pages/auth/signup-form', { errors: errorsSignup })
     }
+}
+
+/* SIGNIN */
+exports.signinForm = (req, res, next) => {
+    res.end()
+}
+
+exports.signin = (req, res, next) => {
+    res.end()
+}
+
+/* SIGNOUT */
+exports.signout = (req, res, next) => {
+    res.end()
 }

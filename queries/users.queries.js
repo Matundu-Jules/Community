@@ -18,12 +18,15 @@ exports.createUser = async (user) => {
     }
 }
 
-// verify if email is already exist
 exports.findUserPerEmail = (email) => {
-    return User.findOne({ where: { email: email } })
+    return User.findOne({ where: { 'local.email': email } })
+}
+
+exports.findUserPerId = (userId) => {
+    return User.findByPk(userId)
 }
 
 // verify if pseudo is already exist
-exports.pseudoExistQuery = (pseudo) => {
-    return User.findOne({ where: { pseudo: pseudo } })
-}
+// exports.pseudoExistQuery = (pseudo) => {
+//     return User.findOne({ where: { pseudo: pseudo } })
+// }

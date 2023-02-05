@@ -9,8 +9,9 @@ const errorHandler = require('errorhandler')
 const app = express()
 exports.app = app
 
-// sessions config
+// sessions/passport config
 require('./config/session.config')
+require('./config/passport.config')
 
 // views config
 app.set('views', path.join(__dirname, 'views'))
