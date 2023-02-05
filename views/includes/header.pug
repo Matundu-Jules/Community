@@ -6,8 +6,8 @@ header.header
       class=`${currentPage === 'home' || currentPage === 'post-list' ? 'navbar-item active' : 'navbar-item'}`,
       href=`${currentPage === 'home' || currentPage === 'post-list' ? '#' : process.env.URLWEBSITE}`) Home
     a(
-      class=`${currentPage === 'login' ? 'navbar-item active' : 'navbar-item'}`,
-      href=`${currentPage === 'login' ? '#' : `${process.env.URLWEBSITE}/auth/login/form`}`) Log in
+      class=`${currentPage === 'signin' ? 'navbar-item active' : 'navbar-item'}`,
+      href=`${currentPage === 'signin' ? '#' : `${process.env.URLWEBSITE}/auth/signin/form`}`) Sign in
     a(
       class=`${currentPage === 'signup' ? 'navbar-item active' : 'navbar-item'}`,
       href=`${currentPage === 'signup' ? '#' : `${process.env.URLWEBSITE}/auth/signup/form`}`) Sign up

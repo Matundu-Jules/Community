@@ -1,3 +1,4 @@
+const passport = require('passport')
 const { createUser } = require('../queries/users.queries')
 /* ERROR HANDLER */
 let errorsSignup = {
@@ -33,14 +34,31 @@ exports.signup = async (req, res, next) => {
 
 /* SIGNIN */
 exports.signinForm = (req, res, next) => {
-    res.end()
+    res.render('pages/auth/signin-form', { errors: null })
 }
 
 exports.signin = (req, res, next) => {
-    res.end()
+    passport.authenticate('local', (err, user, info) => {
+        if (err) {
+            next(err)
+        } else if (!user) {
+            res.status(403).render('pages/auth/signin-form', {
+                errors: info.message,
+            })
+        } else {
+            req.login(user, (err) => {
+                if (err) {
+                    next(err)
+                } else {
+                    res.redirect('/posts')
+                }
+            })
+        }
+    })(req, res, next)
 }
 
 /* SIGNOUT */
 exports.signout = (req, res, next) => {
-    res.end()
+    req.logout()
+    res.redirect('/auth/signin/form')
 }

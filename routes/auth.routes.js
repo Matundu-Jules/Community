@@ -9,7 +9,7 @@ const {
 
 // Routing pug
 router.get('/signup/form', signupForm)
-router.get('signin/form', signinForm)
+router.get('/signin/form', signinForm)
 
 // API
 router.post('/signup', signup) // inscription

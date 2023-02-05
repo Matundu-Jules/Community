@@ -1,36 +1,26 @@
 extends ../../layout.pug
 
 block nav
-  - var currentPage = 'signup'
+  - var currentPage = 'signin'
 
 block content
   div.signup-container
     div.signup-form-container.card
-      form.signup-form(method='post', action='/auth/signup')
-        h1 Signup Form
+      form.signup-form(method='post', action='/auth/signin')
+        h1 Signin Form
 
         hr
-
-        div.signup-input-container
-          label(for='username') Username
-          input#username.signup-input(type='text', name='username')
-
-          if (errors && errors.username)
-            p.error= errors.username
 
         div.signup-input-container
           label(for='email') Email
           input#email.signup-input(type='email', name='email')
 
-          if (errors && errors.email)
-            p.error= errors.email
-
         div.signup-input-container
           label(for='password') Mot de passe
           input#password.signup-input(type='password', name='password')
 
-          if (errors && errors.password)
-            p.error= errors.password
+          if (errors)
+            p.error= errors
 
         div.signup-submit-container
           input.btn.btn-primary(type='submit', value='submit')
