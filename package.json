@@ -4,8 +4,7 @@
   "description": "Social network like Twitter.",
   "main": "app.js",
   "scripts": {
-    "start": "set NODE_ENV=development && nodemon app.js -e js,scss,pug",
-    "start:prod": "set NODE_ENV=production && nodemon app.js -e js,scss,pug",
+    "start": "nodemon app.js -e js,scss,pug",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

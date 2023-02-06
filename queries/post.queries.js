@@ -1,4 +1,4 @@
-const Post = require('../models/post.model')
+const { Post } = require('../config/postgresql.config')
 
 // verify if email is already exist
 exports.getAllPostQuery = () => {

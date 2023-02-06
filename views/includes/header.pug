@@ -2,15 +2,20 @@ header.header
   a.logo-link(href=`${currentPage === 'home' ? '#' : process.env.URLWEBSITE}`)
     img.logo-img(src=`${process.env.IMAGESFOLDER}/logo-community.png`)
   nav.navbar
-    a(
-      class=`${currentPage === 'home' || currentPage === 'post-list' ? 'navbar-item active' : 'navbar-item'}`,
-      href=`${currentPage === 'home' || currentPage === 'post-list' ? '#' : process.env.URLWEBSITE}`) Home
-    a(
-      class=`${currentPage === 'signin' ? 'navbar-item active' : 'navbar-item'}`,
-      href=`${currentPage === 'signin' ? '#' : `${process.env.URLWEBSITE}/auth/signin/form`}`) Sign in
-    a(
-      class=`${currentPage === 'signup' ? 'navbar-item active' : 'navbar-item'}`,
-      href=`${currentPage === 'signup' ? '#' : `${process.env.URLWEBSITE}/auth/signup/form`}`) Sign up
-    a(
-      class=`${currentPage === 'post-form' ? 'navbar-item-post active' : 'navbar-item-post'}`,
-      href=`${currentPage === 'post-form' ? '#' : `${process.env.URLWEBSITE}/posts/new`}`) New post
+    if isAuthenticated
+      a(
+        class=`${currentPage === 'home' || currentPage === 'post-list' ? 'navbar-item active' : 'navbar-item'}`,
+        href=`${currentPage === 'home' || currentPage === 'post-list' ? '#' : process.env.URLWEBSITE}`) Home
+      a(
+        class=`${currentPage === 'post-form' ? 'navbar-item-post active' : 'navbar-item-post'}`,
+        href=`${currentPage === 'post-form' ? '#' : `${process.env.URLWEBSITE}/posts/new`}`) New post
+      a(
+        class=`${currentPage === 'signout' ? 'navbar-item active' : 'navbar-item'}`,
+        href=`${currentPage === 'signout' ? '#' : `${process.env.URLWEBSITE}/auth/signout`}`) Signout
+    else
+      a(
+        class=`${currentPage === 'signin' ? 'navbar-item active' : 'navbar-item'}`,
+        href=`${currentPage === 'signin' ? '#' : `${process.env.URLWEBSITE}/auth/signin/form`}`) Sign in
+      a(
+        class=`${currentPage === 'signup' ? 'navbar-item active' : 'navbar-item'}`,
+        href=`${currentPage === 'signup' ? '#' : `${process.env.URLWEBSITE}/auth/signup/form`}`) Sign up

@@ -1,5 +1,5 @@
 const session = require('express-session')
-const sequelize = require('./postgresql.config')
+const { sequelize } = require('./postgresql.config')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
 const { app } = require('../app')
 
@@ -24,11 +24,12 @@ app.use(
 )
 
 // sync store
-sessionStore
-    .sync({ alter: true })
-    .then(() => {
-        console.log('session store sync !')
-    })
-    .catch((err) => {
-        next(err)
-    })
+// sessionStore
+//     .sync({ alter: true })
+//     .then(() => {
+//         console.log('session store sync !')
+//     })
+//     .catch((err) => {
+//         throw err
+//         next(err)
+//     })

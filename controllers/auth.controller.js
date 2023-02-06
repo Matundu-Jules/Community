@@ -1,5 +1,7 @@
+const { use } = require('passport')
 const passport = require('passport')
 const { createUser } = require('../queries/users.queries')
+
 /* ERROR HANDLER */
 let errorsSignup = {
     username: '',
@@ -9,7 +11,11 @@ let errorsSignup = {
 
 /* SIGNUP */
 exports.signupForm = (req, res, next) => {
-    res.render('pages/auth/signup-form', { errors: null })
+    res.render('pages/auth/signup-form', {
+        errors: null,
+        isAuthenticated: req.isAuthenticated(),
+        currentUser: req.user,
+    })
 }
 
 exports.signup = async (req, res, next) => {
@@ -17,7 +23,10 @@ exports.signup = async (req, res, next) => {
     try {
         const user = await createUser(body)
 
-        res.redirect('/')
+        req.login(user, (err) => {
+            if (err) next(err)
+            res.redirect('/')
+        })
     } catch (err) {
         console.log(err.message)
         if (err.message.includes('username')) {
@@ -28,13 +37,21 @@ exports.signup = async (req, res, next) => {
             console.log('EMAIL : ', errorsSignup.email)
         }
 
-        res.render('pages/auth/signup-form', { errors: errorsSignup })
+        res.status(403).render('pages/auth/signup-form', {
+            errors: errorsSignup,
+            isAuthenticated: req.isAuthenticated(),
+            currentUser: req.user,
+        })
     }
 }
 
 /* SIGNIN */
 exports.signinForm = (req, res, next) => {
-    res.render('pages/auth/signin-form', { errors: null })
+    res.render('pages/auth/signin-form', {
+        errors: null,
+        isAuthenticated: req.isAuthenticated(),
+        currentUser: req.user,
+    })
 }
 
 exports.signin = (req, res, next) => {
@@ -44,6 +61,8 @@ exports.signin = (req, res, next) => {
         } else if (!user) {
             res.status(403).render('pages/auth/signin-form', {
                 errors: info.message,
+                isAuthenticated: req.isAuthenticated(),
+                currentUser: req.user,
             })
         } else {
             req.login(user, (err) => {
@@ -59,6 +78,10 @@ exports.signin = (req, res, next) => {
 
 /* SIGNOUT */
 exports.signout = (req, res, next) => {
-    req.logout()
-    res.redirect('/auth/signin/form')
+    req.logout((err) => {
+        if (err) {
+            return next(err)
+        }
+        res.redirect('/auth/signin/form')
+    })
 }

@@ -1,4 +1,4 @@
-const User = require('../models/user.model')
+const { User } = require('../config/postgresql.config')
 
 exports.createUser = async (user) => {
     try {

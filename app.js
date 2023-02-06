@@ -33,8 +33,11 @@ app.use(routing)
 
 // development config
 if (process.env.NODE_ENV === 'development') {
+    console.log('in development..')
     app.use(errorHandler())
 } else {
+    console.log('in production..')
+
     // in production return only errors for users
     app.use((err, req, res, next) => {
         const code = err.code || 500

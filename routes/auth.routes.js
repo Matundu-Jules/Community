@@ -14,6 +14,6 @@ router.get('/signin/form', signinForm)
 // API
 router.post('/signup', signup) // inscription
 router.post('/signin', signin) // connection
-router.post('/signout', signout) // logout
+router.get('/signout', signout) // logout
 
 module.exports = router

@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize')
+const { Sequelize, DataTypes } = require('sequelize')
 
 // create Sequelize instance
 const sequelize = new Sequelize(
@@ -19,4 +19,25 @@ sequelize
     .then(() => console.log('connection with community database is connected'))
     .catch((err) => console.error('Database connexion failed', err.stack))
 
-module.exports = sequelize
+// relations
+const db = {}
+db.sequelize = sequelize
+db.User = require('../models/user.model')(sequelize)
+db.Post = require('../models/post.model')(sequelize)
+
+db.User.hasMany(db.Post, {
+    foreignKey: { name: 'author', allowNull: false, type: DataTypes.UUID },
+})
+db.Post.belongsTo(db.User, { foreignKey: 'author' })
+
+sequelize
+    .sync()
+    .then(() => {
+        console.log('db sync')
+    })
+    .catch((err) => {
+        console.log('Database Sync Error')
+        throw err
+    })
+
+module.exports = db
