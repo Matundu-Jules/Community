@@ -30,7 +30,7 @@ db.User.hasMany(db.Post, {
 })
 db.Post.belongsTo(db.User, { foreignKey: 'author' })
 
-sequelize
+db.sequelize
     .sync()
     .then(() => {
         console.log('db sync')

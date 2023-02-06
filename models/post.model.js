@@ -27,7 +27,7 @@ module.exports = (sequelize, User) => {
                 },
             },
             author: {
-                type: DataTypes.UUID,
+                type: DataTypes.STRING,
                 references: {
                     model: 'Users',
                 },

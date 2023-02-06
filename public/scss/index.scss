@@ -173,6 +173,10 @@
   .signup-form-container {
     width: 40%;
     min-width: 28rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     .signup-form {
       display: flex;
@@ -206,6 +210,11 @@
       }
     }
   }
+}
+
+// Socials Auth Btns
+.socials-auth {
+  margin-top: 2rem;
 }
 
 /* FOOTER */

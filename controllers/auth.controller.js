@@ -1,6 +1,5 @@
-const { use } = require('passport')
 const passport = require('passport')
-const { createUser } = require('../queries/users.queries')
+const { createUserQuery } = require('../queries/users.queries')
 
 /* ERROR HANDLER */
 let errorsSignup = {
@@ -9,8 +8,11 @@ let errorsSignup = {
     password: '',
 }
 
-/* SIGNUP */
+/* ROUTING PUG */
+
+// SIGNUP FORM
 exports.signupForm = (req, res, next) => {
+    console.log(req.isAuthenticated())
     res.render('pages/auth/signup-form', {
         errors: null,
         isAuthenticated: req.isAuthenticated(),
@@ -18,10 +20,23 @@ exports.signupForm = (req, res, next) => {
     })
 }
 
+// SIGNIN FORM
+exports.signinForm = (req, res, next) => {
+    res.render('pages/auth/signin-form', {
+        errors: null,
+        isAuthenticated: req.isAuthenticated(),
+        currentUser: req.user,
+    })
+}
+
+/* LOCAL AUTH */
+
+// SIGNUP
 exports.signup = async (req, res, next) => {
     const body = req.body
     try {
-        const user = await createUser(body)
+        const user = await createUserQuery(body)
+        console.log(body)
 
         req.login(user, (err) => {
             if (err) next(err)
@@ -45,15 +60,7 @@ exports.signup = async (req, res, next) => {
     }
 }
 
-/* SIGNIN */
-exports.signinForm = (req, res, next) => {
-    res.render('pages/auth/signin-form', {
-        errors: null,
-        isAuthenticated: req.isAuthenticated(),
-        currentUser: req.user,
-    })
-}
-
+// SIGNIN
 exports.signin = (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
         if (err) {
@@ -76,7 +83,7 @@ exports.signin = (req, res, next) => {
     })(req, res, next)
 }
 
-/* SIGNOUT */
+// SIGNOUT
 exports.signout = (req, res, next) => {
     req.logout((err) => {
         if (err) {
@@ -84,4 +91,19 @@ exports.signout = (req, res, next) => {
         }
         res.redirect('/auth/signin/form')
     })
+}
+
+/* GOOGLE AUTH */
+exports.googleAuth = (req, res, next) => {
+    passport.authenticate('google', {
+        scope: ['email', 'profile'],
+    })(req, res, next)
+}
+
+exports.googleAuthCb = (req, res, next) => {
+    passport.authenticate('google', {
+        successRedirect: '/posts',
+        failureRedirect: '/auth/signup/form',
+        failureMessage: 'ERROR GOOGLE AUTH',
+    })(req, res, next)
 }

@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
     User.init(
         {
             id: {
-                type: DataTypes.UUID,
+                type: DataTypes.STRING,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
             },
@@ -74,6 +74,7 @@ module.exports = (sequelize) => {
                         notEmpty: { msg: 'You must enter a password' },
                     },
                 },
+                googleId: { type: DataTypes.STRING },
             },
         },
         {

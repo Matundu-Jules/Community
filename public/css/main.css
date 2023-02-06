@@ -35,6 +35,9 @@ a {
   color: var(--primary);
   text-decoration: none;
 }
+a:hover {
+  text-shadow: 0 0 1rem rgba(0, 48, 73, 0.5);
+}
 
 ul {
   list-style: none;
@@ -291,6 +294,10 @@ hr {
 .signup-container .signup-form-container {
   width: 40%;
   min-width: 28rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .signup-container .signup-form-container .signup-form {
   display: flex;
@@ -317,6 +324,10 @@ hr {
   border-radius: 1rem;
 }
 .signup-container .signup-form-container .signup-form .signup-submit-container {
+  margin-top: 2rem;
+}
+
+.socials-auth {
   margin-top: 2rem;
 }
 

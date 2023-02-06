@@ -1,6 +1,6 @@
 const { User } = require('../config/postgresql.config')
 
-exports.createUser = async (user) => {
+exports.createUserQuery = async (user) => {
     try {
         const hashedPassword = await User.hashPassword(user.password)
 
@@ -18,15 +18,14 @@ exports.createUser = async (user) => {
     }
 }
 
-exports.findUserPerEmail = (email) => {
+exports.findUserPerEmailQuery = (email) => {
     return User.findOne({ where: { 'local.email': email } })
 }
 
-exports.findUserPerId = (userId) => {
+exports.findUserPerIdQuery = (userId) => {
     return User.findByPk(userId)
 }
 
-// verify if pseudo is already exist
-// exports.pseudoExistQuery = (pseudo) => {
-//     return User.findOne({ where: { pseudo: pseudo } })
-// }
+exports.findUserPerGoogleIdQuery = (googleId) => {
+    return User.findOne({ where: { id: googleId } })
+}

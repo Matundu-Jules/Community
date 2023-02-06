@@ -34,6 +34,10 @@ a {
   font-size: 1.6rem;
   color: var(--primary);
   text-decoration: none;
+
+  &:hover {
+    text-shadow: 0 0 1rem rgba(#003049, 0.5);
+  }
 }
 
 ul {

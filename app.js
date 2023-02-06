@@ -34,6 +34,16 @@ app.use(routing)
 // development config
 if (process.env.NODE_ENV === 'development') {
     console.log('in development..')
+    app.use((req, res, next) => {
+        res.setHeader(
+            'Access-Control-Allow-Headers',
+            'Content-Type, Accept, Origin, Authorization'
+        )
+        res.setHeader(
+            'Access-Control-Allow-Methods',
+            'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+        )
+    })
     app.use(errorHandler())
 } else {
     console.log('in production..')
