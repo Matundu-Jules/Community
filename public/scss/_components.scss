@@ -50,8 +50,8 @@
 .card {
   border: 1px solid var(--gray-light);
   border-radius: 0.5rem;
-  box-shadow: 0 0 10px var(--gray-light);
-  background-color: rgba(#bab9b6, 0.5);
+  // box-shadow: 0 0 10px var(--gray-light);
+  background-color: var(--background);
   padding: 4rem;
 
   &-header {
@@ -59,6 +59,10 @@
 
   &-body {
   }
+}
+/* TEXT */
+.text-primary {
+  color: var(--primary);
 }
 
 /* LINKS */

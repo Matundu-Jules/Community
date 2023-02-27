@@ -1,1 +1,16 @@
-//- p profile
+div.profile-container
+  div.profile-img-container
+    img(src=`${process.env.IMAGESFOLDER}/default-profile.jpg`)
+  div.profile-name-container
+    p= `${currentUser.username} (${currentUser.local.email})`
+  div.profile-infos-container
+    div.profile-infos-posts-container
+      p
+        strong Posts
+        br
+        span.text-primary= posts.length
+    div.profile-infos-posts-container
+      p
+        strong Following
+        br
+        span.text-primary -
