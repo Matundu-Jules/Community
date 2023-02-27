@@ -1,5 +1,11 @@
 div.profile-container
-  div.profile-img-container
+  form.profile-img-container
+    input(
+      type='file',
+      name='avatar',
+      action='/users/update/image',
+      method='post',
+      enctype='multipart/form-data')
     img(src=`${process.env.IMAGESFOLDER}/default-profile.jpg`)
   div.profile-name-container
     p= `${currentUser.username} (${currentUser.local.email})`

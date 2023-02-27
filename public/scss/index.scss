@@ -175,11 +175,16 @@
   justify-content: center;
   align-items: center;
 
+  input {
+    display: none;
+  }
+
   img {
     max-height: 12rem;
     border-radius: 10rem;
   }
 }
+
 .profile-name-container {
   margin: 0.5rem 0;
   display: flex;

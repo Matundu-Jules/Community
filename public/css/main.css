@@ -303,6 +303,9 @@ hr {
   justify-content: center;
   align-items: center;
 }
+.profile-img-container input {
+  display: none;
+}
 .profile-img-container img {
   max-height: 12rem;
   border-radius: 10rem;
