@@ -5,7 +5,7 @@ div.profile-container
     method='post',
     enctype='multipart/form-data')
     input#input-avatar(type='file', name='avatar')
-    img(src=`${process.env.IMAGESFOLDER}/default-profile.jpg`)
+    img(src=currentUser.avatar)
   div.profile-name-container
     p= `${currentUser.username} (${currentUser.local.email})`
   div.profile-infos-container
