@@ -1,11 +1,10 @@
+script(src=`${process.env.JSFOLDER}/profile.js`) 
 div.profile-container
-  form.profile-img-container
-    input(
-      type='file',
-      name='avatar',
-      action='/users/update/image',
-      method='post',
-      enctype='multipart/form-data')
+  form#form-img-profile.profile-img-container(
+    action='/users/update/image',
+    method='post',
+    enctype='multipart/form-data')
+    input#input-avatar(type='file', name='avatar')
     img(src=`${process.env.IMAGESFOLDER}/default-profile.jpg`)
   div.profile-name-container
     p= `${currentUser.username} (${currentUser.local.email})`
