@@ -17,33 +17,13 @@ require('./config/passport.config')
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 
-// http request logger
-app.use(morgan('dev'))
-
-// static middleware for files
-app.use('/public', express.static(path.join(__dirname, 'public')))
-
-// get data from req.body in all application for all routes.
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-
-// routes
-const routing = require('./routes')
-app.use(routing)
-
 // development config
 if (process.env.NODE_ENV === 'development') {
     console.log('in development..')
-    app.use((req, res, next) => {
-        res.setHeader(
-            'Access-Control-Allow-Headers',
-            'Content-Type, Accept, Origin, Authorization'
-        )
-        res.setHeader(
-            'Access-Control-Allow-Methods',
-            'GET, POST, PUT, DELETE, PATCH, OPTIONS'
-        )
-    })
+
+    // http request logger
+    app.use(morgan('dev'))
+
     app.use(errorHandler())
 } else {
     console.log('in production..')
@@ -57,6 +37,17 @@ if (process.env.NODE_ENV === 'development') {
         })
     })
 }
+
+// static middleware for files
+app.use('/public', express.static(path.join(__dirname, 'public')))
+
+// get data from req.body in all application for all routes.
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+// routes
+const routing = require('./routes')
+app.use(routing)
 
 // port
 const port = process.env.PORT || 80

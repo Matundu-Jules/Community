@@ -46,7 +46,7 @@ module.exports = (sequelize) => {
 
                     validate: {
                         len: {
-                            args: [8, 50],
+                            args: [8, 256],
                             msg: 'Email must be between 8 and 50 characters',
                         },
 
