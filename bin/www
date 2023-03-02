@@ -1,26 +1,30 @@
 const env = require(`../environment/${process.env.NODE_ENV}`);
 const fs = require("fs");
-const path = require("path");
 const http = require("http");
 const https = require("https");
 
 const app = require("../app");
 
 // Redirection http to https
-const httpServer = http
+http
   .createServer((req, res) => {
-    res.writeHead(301, {
-      Location: `https://${req.headers.hostname}${req.url}`,
+    console.log("http server");
+    console.log({
+      host: req.headers.host,
+      url: req.url,
     });
+
+    res.writeHead("301", { Location: `https://${req.headers.host}${req.url}` });
+    res.end();
   })
   .listen(80);
 
-const httpsServer = https
-  .createServer(
-    {
-      key: fs.readFileSync(env.key),
-      cert: fs.readFileSync(env.cert),
-    },
-    app
-  )
-  .listen(443);
+const server = https.createServer(
+  {
+    key: fs.readFileSync(env.key),
+    cert: fs.readFileSync(env.cert),
+  },
+  app
+);
+
+server.listen(443);
