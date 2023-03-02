@@ -13,11 +13,11 @@ exports.uploadProfileImg = [
 
             if (user.avatar.includes('default-profile')) {
                 // Update image
-                user.avatar = `${process.env.IMAGESFOLDER}/avatars/${req.file.filename}`
+                user.avatar = `/public/images/avatars/${req.file.filename}`
                 await user.save()
             } else {
                 // Update image
-                user.avatar = `${process.env.IMAGESFOLDER}/avatars/${req.file.filename}`
+                user.avatar = `/public/images/avatars/${req.file.filename}`
                 await user.save()
 
                 // Delete previous profile img

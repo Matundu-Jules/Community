@@ -6,7 +6,8 @@
         "trailingComma": "es5",
         "tabWidth": 4,
         "semi": false,
-        "singleQuote": true
+        "singleQuote": true,
+        "printWidth": 150
       }
     },
     {
@@ -33,6 +34,12 @@
       "files": "*.scss",
       "options": {
         "parser": "scss"
+      }
+    },
+    {
+      "files": "*",
+      "options": {
+        "printWidth": 120
       }
     }
   ]

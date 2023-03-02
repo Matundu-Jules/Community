@@ -6,25 +6,17 @@ const https = require("https");
 const app = require("../app");
 
 // Redirection http to https
-http
-  .createServer((req, res) => {
-    console.log("http server");
-    console.log({
-      host: req.headers.host,
-      url: req.url,
-    });
+const HttpServer = http.createServer((req, res) => {
+  res.writeHead("301", { Location: `https://${req.headers.host.split(":")[0] + ":" + env.PORTHTTPS}${req.url}` });
+  res.end();
+});
+HttpServer.listen(env.PORTHTTP);
 
-    res.writeHead("301", { Location: `https://${req.headers.host}${req.url}` });
-    res.end();
-  })
-  .listen(80);
-
-const server = https.createServer(
+const HttpsServer = https.createServer(
   {
     key: fs.readFileSync(env.key),
     cert: fs.readFileSync(env.cert),
   },
   app
 );
-
-server.listen(443);
+HttpsServer.listen(env.PORTHTTPS);
