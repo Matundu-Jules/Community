@@ -1,7 +1,7 @@
 const session = require('express-session')
 const { sequelize } = require('./postgresql.config')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
-const { app } = require('../app')
+const app = require('../app')
 
 // create store
 const sessionStore = new SequelizeStore({

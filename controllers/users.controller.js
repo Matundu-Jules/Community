@@ -8,7 +8,7 @@ exports.uploadProfileImg = [
     async (req, res, next) => {
         try {
             const user = req.user
-            const oldImage = user.avatar.split('http://localhost:8080').pop() // get path off previous profile img
+            const oldImage = user.avatar.split(process.env.URLWEBSITE).pop() // get path off previous profile img
             const pathOldImage = path.join(__dirname, `../${oldImage}`)
 
             if (user.avatar.includes('default-profile')) {

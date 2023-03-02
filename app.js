@@ -1,13 +1,16 @@
-require('dotenv').config()
 require('./config/scss.config')
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
 const errorHandler = require('errorhandler')
 
+require('dotenv').config({
+    path: path.resolve(__dirname, '.env.' + process.env.NODE_ENV),
+})
+
 // create/export express app
 const app = express()
-exports.app = app
+module.exports = app
 
 // sessions/passport config
 require('./config/session.config')
@@ -48,10 +51,3 @@ app.use(express.urlencoded({ extended: true }))
 // routes
 const routing = require('./routes')
 app.use(routing)
-
-// port
-const port = process.env.PORT || 80
-app.listen(port, (err) => {
-    if (err) console.log(err)
-    console.log('server port :', port)
-})

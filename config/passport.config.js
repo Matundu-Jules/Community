@@ -1,7 +1,7 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const GoogleStrategy = require('passport-google-oauth20').Strategy
-const { app } = require('../app')
+const app = require('../app')
 const { User } = require('./postgresql.config')
 const {
     findUserPerEmailQuery,
@@ -60,7 +60,7 @@ passport.use(
         {
             clientID: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            callbackURL: '/auth/google/cb',
+            callbackURL: process.env.GOOGLE_CLIENT_CALLBACK_URL,
         },
         async (accessToken, refreshToken, profile, done) => {
             try {

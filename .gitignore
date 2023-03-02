@@ -2,6 +2,8 @@ node_modules
 features.txt
 steps.txt
 .env
+.env.development
+.env.production
 .vscode
 example.js
 infos-dev.md

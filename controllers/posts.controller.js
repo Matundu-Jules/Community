@@ -9,7 +9,7 @@ const {
 // pug : display all posts
 exports.postForm = (req, res) => {
     res.render('pages/posts/post-form', {
-        post: {},
+        posts: {},
         isAuthenticated: req.isAuthenticated(),
         currentUser: req.user,
     })
@@ -42,7 +42,7 @@ exports.postCreate = async (req, res, next) => {
             (key) => err.errors[key].message
         )
         res.status(403).render('pages/posts/post-form', {
-            post: {},
+            posts: {},
             errors,
             isAuthenticated: req.isAuthenticated(),
             currentUser: req.user,
@@ -54,10 +54,10 @@ exports.postCreate = async (req, res, next) => {
 exports.postEdit = async (req, res, next) => {
     try {
         const postId = req.params.postId
-        const post = await getPostQuery(postId)
+        const posts = await getPostQuery(postId)
 
         res.render('pages/posts/post-form', {
-            post,
+            posts,
             isAuthenticated: req.isAuthenticated(),
             currentUser: req.user,
         })
@@ -77,10 +77,10 @@ exports.postUpdate = async (req, res, next) => {
         const errors = Object.keys(err.errors).map(
             (key) => err.errors[key].message
         )
-        const post = await getPostQuery(postId)
+        const posts = await getPostQuery(postId)
         res.status(400).render('pages/posts/post-form', {
             errors,
-            post,
+            posts,
             isAuthenticated: req.isAuthenticated(),
             currentUser: req.user,
         })
