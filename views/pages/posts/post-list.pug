@@ -5,5 +5,12 @@ if posts
   each post in posts
     div.card.post-item
       div.card-body
-        a.card-text(href='/posts/edit/' + post.id)= post.content
-        button.btn.btn-delete.btn-delete-post(post_id=post.id) x
+        div.card-content-user-img
+          img(src=post.author.avatar, alt='the avatar of the post creator')
+          p.card-post-username= post.author.username
+        div.card-content-user-infos
+          div.card-content-user-post= post.content
+          if editable && post.author.id === currentUser.id
+            div.card-post-btn-container
+              a.fa-solid.fa-pen-to-square(href='/posts/edit/' + post.id)
+              button.btn.btn-delete.btn-delete-post(post_id=post.id) x

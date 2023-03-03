@@ -94,6 +94,7 @@
   align-items: flex-start;
 }
 
+/* POST-LIST */
 #post-list-container {
   flex: 1 1 auto;
   align-self: center;
@@ -120,13 +121,52 @@
 
   .card-body {
     display: flex;
+    align-items: center;
+  }
+
+  .card-content-user-img {
+    width: 10%;
+    max-width: 10rem;
+    min-width: 2rem;
+    margin-right: 2rem;
+    img {
+      max-height: 8em;
+      border-radius: 50rem;
+    }
+  }
+
+  .card-post-username {
+    margin: 0;
+    text-align: center;
+  }
+
+  .card-content-user-infos {
+    width: 90%;
+    display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
+  .card-content-user-post {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  .card-post-btn-container {
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+  }
+
+  .fa-pen-to-square {
+    font-size: 2.5rem;
+    margin-right: 1rem;
+    align-self: center;
+  }
+
   .btn-delete-post {
-    height: 3rem;
-    float: right;
+    height: 2.8rem;
+    width: 2.8rem;
   }
 }
 

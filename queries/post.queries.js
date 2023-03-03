@@ -1,4 +1,4 @@
-const { Post } = require('../config/postgresql.config')
+const { Post, User } = require('../config/postgresql.config')
 
 exports.getAllPostQuery = () => {
     return Post.findAll()
@@ -13,11 +13,11 @@ exports.getCurrentUserPostWithFollowingQuery = (user) => {
         currentUserPostWithFollowing = [user.id]
     }
 
-    return Post.findAll({ where: { author: currentUserPostWithFollowing } })
+    return Post.findAll({ where: { authorid: currentUserPostWithFollowing }, include: [{ model: User, as: 'author' }] })
 }
 
-exports.getUserPostsFromUsername = (authorId) => {
-    return Post.findAll({ where: { author: authorId } })
+exports.getUserPostsFromUsername = (authorid) => {
+    return Post.findAll({ where: { authorid: authorid }, include: [{ model: User, as: 'author' }] })
 }
 
 exports.createPostQuery = (post) => {

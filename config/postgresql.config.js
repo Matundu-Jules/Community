@@ -1,17 +1,12 @@
 const { Sequelize, DataTypes } = require('sequelize')
 
 // create Sequelize instance
-const sequelize = new Sequelize(
-    process.env.PGDATABASE,
-    process.env.PGUSER,
-    process.env.PGPASSWORD,
-    {
-        host: process.env.PGHOST,
-        port: process.env.PGPORT,
-        dialect: 'postgres',
-        logging: false,
-    }
-)
+const sequelize = new Sequelize(process.env.PGDATABASE, process.env.PGUSER, process.env.PGPASSWORD, {
+    host: process.env.PGHOST,
+    port: process.env.PGPORT,
+    dialect: 'postgres',
+    logging: false,
+})
 
 // connection with db
 sequelize
@@ -26,9 +21,10 @@ db.User = require('../models/user.model')(sequelize)
 db.Post = require('../models/post.model')(sequelize)
 
 db.User.hasMany(db.Post, {
-    foreignKey: { name: 'author', allowNull: false, type: DataTypes.UUID },
+    as: 'author',
+    foreignKey: { name: 'authorid', allowNull: false, type: DataTypes.UUID },
 })
-db.Post.belongsTo(db.User, { foreignKey: 'author' })
+db.Post.belongsTo(db.User, { as: 'author', foreignKey: 'authorid' })
 
 db.sequelize
     .sync({ alter: true })

@@ -26,6 +26,7 @@ exports.postList = async (req, res, next) => {
             isAuthenticated: req.isAuthenticated(),
             currentUser: req.user,
             user: req.user,
+            editable: true,
         })
     } catch (err) {
         console.log(err)
@@ -37,7 +38,7 @@ exports.postCreate = async (req, res, next) => {
     try {
         const newPost = req.body
         newPost.content.trim()
-        await createPostQuery({ ...newPost, author: req.user.id })
+        await createPostQuery({ ...newPost, authorid: req.user.id })
 
         res.redirect('/')
     } catch (err) {
@@ -47,6 +48,7 @@ exports.postCreate = async (req, res, next) => {
             errors,
             isAuthenticated: req.isAuthenticated(),
             currentUser: req.user,
+            user: req.user,
         })
     }
 }
@@ -61,6 +63,7 @@ exports.postEdit = async (req, res, next) => {
             posts,
             isAuthenticated: req.isAuthenticated(),
             currentUser: req.user,
+            user: req.user,
         })
     } catch (err) {
         next(err)
@@ -82,6 +85,7 @@ exports.postUpdate = async (req, res, next) => {
             posts,
             isAuthenticated: req.isAuthenticated(),
             currentUser: req.user,
+            user: req.user,
         })
     }
 }
@@ -90,11 +94,16 @@ exports.postUpdate = async (req, res, next) => {
 exports.postDelete = async (req, res, next) => {
     try {
         const postId = req.params.postId
-        const result = await deletePostQuery(postId)
-        console.log(result)
+        await deletePostQuery(postId)
+        const posts = await getCurrentUserPostWithFollowingQuery(req.user)
 
-        const posts = await getAllPostQuery()
-        res.render('pages/posts/post-list', { posts })
+        res.render('pages/posts/post-list', {
+            posts,
+            isAuthenticated: req.isAuthenticated(),
+            currentUser: req.user,
+            user: req.user,
+            editable: true,
+        })
     } catch (err) {
         console.log(err)
         next(err)
