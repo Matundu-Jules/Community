@@ -177,6 +177,8 @@
 
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .profile-img-container {
   display: flex;
@@ -201,8 +203,9 @@
   text-align: center;
 }
 .profile-infos-container {
+  width: 80%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   text-align: center;
 

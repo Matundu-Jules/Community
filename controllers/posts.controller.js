@@ -1,6 +1,7 @@
 const {
     getPostQuery,
     getAllPostQuery,
+    getCurrentUserPostWithFollowingQuery,
     createPostQuery,
     deletePostQuery,
     updatePostQuery,
@@ -9,20 +10,22 @@ const {
 // pug : display all posts
 exports.postForm = (req, res) => {
     res.render('pages/posts/post-form', {
-        posts: {},
+        posts: [],
         isAuthenticated: req.isAuthenticated(),
         currentUser: req.user,
+        user: req.user,
     })
 }
 
 exports.postList = async (req, res, next) => {
     try {
-        const posts = await getAllPostQuery()
+        const posts = await getCurrentUserPostWithFollowingQuery(req.user)
 
         res.render('pages/posts/post', {
             posts,
             isAuthenticated: req.isAuthenticated(),
             currentUser: req.user,
+            user: req.user,
         })
     } catch (err) {
         console.log(err)
@@ -38,9 +41,7 @@ exports.postCreate = async (req, res, next) => {
 
         res.redirect('/')
     } catch (err) {
-        const errors = Object.keys(err.errors).map(
-            (key) => err.errors[key].message
-        )
+        const errors = Object.keys(err.errors).map((key) => err.errors[key].message)
         res.status(403).render('pages/posts/post-form', {
             posts: {},
             errors,
@@ -74,9 +75,7 @@ exports.postUpdate = async (req, res, next) => {
 
         res.redirect('/posts')
     } catch (err) {
-        const errors = Object.keys(err.errors).map(
-            (key) => err.errors[key].message
-        )
+        const errors = Object.keys(err.errors).map((key) => err.errors[key].message)
         const posts = await getPostQuery(postId)
         res.status(400).render('pages/posts/post-form', {
             errors,

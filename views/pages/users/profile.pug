@@ -5,15 +5,16 @@ div.profile-container
     method='post',
     enctype='multipart/form-data')
     input#input-avatar(type='file', name='avatar')
-    img(src=currentUser.avatar)
+    img(src=user.avatar)
   div.profile-name-container
-    p= `${currentUser.username} (${currentUser.local.email})`
+    p= `${user.username} (${user.local.email})`
   div.profile-infos-container
     div.profile-infos-posts-container
       p
         strong Posts
         br
-        span.text-primary= posts.length
+        span.text-primary= posts && posts.length ? posts.length : '-'
+        //- posts.length === 0 ? 0 : posts.length
     div.profile-infos-posts-container
       p
         strong Following
