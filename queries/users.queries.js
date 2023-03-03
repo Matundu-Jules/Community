@@ -29,3 +29,7 @@ exports.findUserPerIdQuery = (userId) => {
 exports.findUserPerGoogleIdQuery = (googleId) => {
     return User.findOne({ where: { id: googleId } })
 }
+
+exports.findUserPerUsername = (username) => {
+    return User.findOne({ where: { username } })
+}

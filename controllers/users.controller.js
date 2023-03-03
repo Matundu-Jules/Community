@@ -1,6 +1,8 @@
 const upload = require('../config/multer.config')
 const fs = require('fs')
 const path = require('path')
+const { findUserPerUsername } = require('../queries/users.queries')
+const { findPostsByAuthorId } = require('../queries/post.queries')
 
 // POST : Update profile img
 exports.uploadProfileImg = [
@@ -34,3 +36,23 @@ exports.uploadProfileImg = [
         }
     },
 ]
+
+// GET : display user profile
+exports.userProfile = async (req, res, next) => {
+    try {
+        const username = req.params.username
+        const user = await findUserPerUsername(username)
+
+        const posts = await findPostsByAuthorId(user.id)
+
+        res.render('pages/posts/post', {
+            posts,
+            isAuthenticated: req.isAuthenticated(),
+            currentUser: req.user,
+            user,
+            editable: req.user.username === username ? true : false,
+        })
+    } catch (err) {
+        next(err)
+    }
+}

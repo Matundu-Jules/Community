@@ -16,7 +16,7 @@ exports.getCurrentUserPostWithFollowingQuery = (user) => {
     return Post.findAll({ where: { authorid: currentUserPostWithFollowing }, include: [{ model: User, as: 'author' }] })
 }
 
-exports.getUserPostsFromUsername = (authorid) => {
+exports.findPostsByAuthorId = (authorid) => {
     return Post.findAll({ where: { authorid: authorid }, include: [{ model: User, as: 'author' }] })
 }
 
