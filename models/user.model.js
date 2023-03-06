@@ -38,7 +38,7 @@ module.exports = (sequelize) => {
             },
             avatar: {
                 type: DataTypes.STRING,
-                defaultValue: 'public/images/default-profile.jpg',
+                defaultValue: '/public/images/default-profile.jpg',
             },
             following: {
                 type: DataTypes.ARRAY(DataTypes.STRING),

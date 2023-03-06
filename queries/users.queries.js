@@ -36,11 +36,26 @@ exports.findUserPerUsername = (username) => {
 }
 
 exports.searchUsersPerUsername = (search) => {
-    const regExp = `^${search}`
-    // const reg = new RegExp(regExp) // no need for sequelize
+    const likeExp = `${search}%`
 
     return User.findAll({
-        where: { username: { [Op.regexp]: regExp } },
+        where: { username: { [Op.iLike]: likeExp } },
         order: [['username', 'ASC']],
     })
+}
+
+exports.addUserIdToCurrentUserFollowing = (currentUser, userId) => {
+    if (currentUser.following === null) {
+        currentUser.following = [userId]
+    } else {
+        currentUser.following = [...currentUser.following, userId]
+    }
+
+    return currentUser.save()
+}
+
+exports.deleteUserIdToCurrentUserFollowing = (currentUser, userId) => {
+    currentUser.following = currentUser.following.filter((id) => id !== userId)
+
+    return currentUser.save()
 }

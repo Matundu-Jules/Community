@@ -1,4 +1,4 @@
-const { Post, User } = require('../config/postgresql.config')
+const { Post, User, sequelize } = require('../config/postgresql.config')
 
 exports.getAllPostQuery = () => {
     return Post.findAll()
@@ -13,11 +13,19 @@ exports.getCurrentUserPostWithFollowingQuery = (user) => {
         currentUserPostWithFollowing = [user.id]
     }
 
-    return Post.findAll({ where: { authorid: currentUserPostWithFollowing }, include: [{ model: User, as: 'author' }] })
+    return Post.findAll({
+        where: { authorid: currentUserPostWithFollowing },
+        include: [{ model: User, as: 'author' }],
+        order: [['createdAt', 'DESC']],
+    })
 }
 
 exports.findPostsByAuthorId = (authorid) => {
-    return Post.findAll({ where: { authorid: authorid }, include: [{ model: User, as: 'author' }] })
+    return Post.findAll({
+        where: { authorid: authorid },
+        include: [{ model: User, as: 'author' }],
+        order: [['createdAt', 'DESC']],
+    })
 }
 
 exports.createPostQuery = (post) => {

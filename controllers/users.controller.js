@@ -1,7 +1,13 @@
 const upload = require('../config/multer.config')
 const fs = require('fs')
 const path = require('path')
-const { findUserPerUsername, searchUsersPerUsername } = require('../queries/users.queries')
+const {
+    findUserPerUsername,
+    searchUsersPerUsername,
+    addUserIdToCurrentUserFollowing,
+    findUserPerIdQuery,
+    deleteUserIdToCurrentUserFollowing,
+} = require('../queries/users.queries')
 const { findPostsByAuthorId } = require('../queries/post.queries')
 
 // POST : Update profile img
@@ -45,6 +51,9 @@ exports.userProfile = async (req, res, next) => {
 
         const posts = await findPostsByAuthorId(user.id)
 
+        console.log('FOLLOWING : ', user.following)
+        console.log('CURRENT FOLLOWING : ', req.user.following)
+
         res.render('pages/posts/post', {
             posts,
             isAuthenticated: req.isAuthenticated(),
@@ -64,6 +73,40 @@ exports.userSearchList = async (req, res, next) => {
         const users = await searchUsersPerUsername(search)
 
         res.render('includes/search-menu', { users })
+    } catch (err) {
+        next(err)
+    }
+}
+
+// GET : follow user
+exports.userFollow = async (req, res, next) => {
+    try {
+        const userId = req.params.userId
+
+        // ignore first value in array and get the second in user
+        const [, user] = await Promise.all([
+            addUserIdToCurrentUserFollowing(req.user, userId),
+            findUserPerIdQuery(userId),
+        ])
+
+        res.redirect(`/users/profile/${user.username}`)
+    } catch (err) {
+        next(err)
+    }
+}
+
+// GET : unfollow user
+exports.userUnfollow = async (req, res, next) => {
+    try {
+        const userId = req.params.userId
+
+        // ignore first value in array and get the second in user
+        const [, user] = await Promise.all([
+            deleteUserIdToCurrentUserFollowing(req.user, userId),
+            findUserPerIdQuery(userId),
+        ])
+
+        res.redirect(`/users/profile/${user.username}`)
     } catch (err) {
         next(err)
     }

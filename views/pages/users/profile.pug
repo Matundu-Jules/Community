@@ -8,15 +8,23 @@ div.profile-container
     img(src=user.avatar)
   div.profile-name-container
     p= `${user.username} (${user.local.email})`
+  if currentUser.id !== user.id
+    div.flex-row-center.mb-1-5
+      if currentUser.following === null
+        a.btn.btn-follow(href=`/users/follow/${user.id}`) Follow
+      else if currentUser.following.map(objId => objId).includes(user.id)
+        a.btn.btn-unfollow(href=`/users/unfollow/${user.id}`) Unfollow
+      else
+        a.btn.btn-follow(href=`/users/follow/${user.id}`) Follow
+
   div.profile-infos-container
     div.profile-infos-posts-container
       p
         strong Posts
         br
-        span.text-primary= posts && posts.length ? posts.length : '-'
-        //- posts.length === 0 ? 0 : posts.length
+        span.text-primary= posts && posts.length ? posts.filter((post) => post.authorid === user.id).length : '-'
     div.profile-infos-posts-container
       p
         strong Following
         br
-        span.text-primary -
+        span.text-primary= user.following && user.following.length ? user.following.length : '-'
