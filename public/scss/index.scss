@@ -22,7 +22,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  border-bottom: var(--border);
 
   .logo-link {
     width: 7rem;
@@ -32,6 +32,64 @@
 
     .logo-img {
       width: 100%;
+    }
+  }
+
+  .search-bar-user-container {
+    margin-left: 3rem;
+    flex: 1 1 auto;
+  }
+  .search-bar-user {
+    width: 18rem;
+    max-width: 100%;
+    min-width: 12rem;
+    padding: 0.7rem 0.5rem;
+    border: var(--border);
+    border-radius: 0.5rem;
+
+    position: relative;
+    z-index: 2;
+  }
+
+  #search-bar-menu-container {
+    position: relative;
+  }
+  .search-bar-menu {
+    width: 18rem;
+    max-width: 100%;
+    min-width: 12rem;
+    min-height: 20rem;
+    padding-top: 1rem;
+    background: var(--background);
+    border-radius: 0.5rem;
+    border: var(--border);
+    box-shadow: var(--box-shadow);
+
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    z-index: 1;
+    top: -1rem;
+  }
+  .search-bar-menu-user-infos {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: var(--border);
+    transition: background 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--background-gray);
+      transition: background 0.2s;
+    }
+
+    img {
+      width: 3rem;
+      height: 3rem;
+      margin-right: 1rem;
+      border-radius: 5rem;
     }
   }
 

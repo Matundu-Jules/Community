@@ -1,8 +1,16 @@
 header.header
   a.logo-link(href=`${currentPage === 'home' ? '#' : process.env.URLWEBSITE}`)
     img.logo-img(src=`${process.env.IMAGESFOLDER}/logo-community.png`)
-  nav.navbar
-    if isAuthenticated
+  if isAuthenticated
+    script(src=`${process.env.JSFOLDER}/search-bar-user.js`) 
+    form.search-bar-user-container
+      input#search-user.search-bar-user(type='text', placeholder='search')
+      div#search-bar-menu-container
+        div.search-bar-menu
+          div.search-bar-menu-user-infos
+            img(src=`${process.env.IMAGESFOLDER}/default-profile.jpg`)
+            span Username
+    nav.navbar
       a(
         class=`${currentPage === 'home' || currentPage === 'post-list' ? 'navbar-item active' : 'navbar-item'}`,
         href=`${currentPage === 'home' || currentPage === 'post-list' ? '#' : process.env.URLWEBSITE}`) Home
@@ -12,7 +20,8 @@ header.header
       a(
         class=`${currentPage === 'signout' ? 'navbar-item active' : 'navbar-item'}`,
         href=`${currentPage === 'signout' ? '#' : `${process.env.URLWEBSITE}/auth/signout`}`) Signout
-    else
+  else
+    nav.navbar
       a(
         class=`${currentPage === 'signin' ? 'navbar-item active' : 'navbar-item'}`,
         href=`${currentPage === 'signin' ? '#' : `${process.env.URLWEBSITE}/auth/signin/form`}`) Sign in
