@@ -1,0 +1,8 @@
+div.search-bar-menu
+  if users && users.length
+    each user in users
+      a.search-bar-menu-user-infos(href=`/users/profile/${user.username}`)
+        img(src=user.avatar)
+        span= user.username
+  else
+    span.search-bar-no-user-found No users found

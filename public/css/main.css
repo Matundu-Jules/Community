@@ -227,6 +227,9 @@ hr {
   margin-right: 1rem;
   border-radius: 5rem;
 }
+.header .search-bar-no-user-found {
+  padding: 1rem;
+}
 .header .navbar {
   display: flex;
   flex-direction: row;

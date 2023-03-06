@@ -1,3 +1,4 @@
+const { Op } = require('sequelize')
 const { User } = require('../config/postgresql.config')
 
 exports.createUserQuery = async (user) => {
@@ -32,4 +33,14 @@ exports.findUserPerGoogleIdQuery = (googleId) => {
 
 exports.findUserPerUsername = (username) => {
     return User.findOne({ where: { username } })
+}
+
+exports.searchUsersPerUsername = (search) => {
+    const regExp = `^${search}`
+    // const reg = new RegExp(regExp) // no need for sequelize
+
+    return User.findAll({
+        where: { username: { [Op.regexp]: regExp } },
+        order: [['username', 'ASC']],
+    })
 }

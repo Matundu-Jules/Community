@@ -6,10 +6,7 @@ header.header
     form.search-bar-user-container
       input#search-user.search-bar-user(type='text', placeholder='search')
       div#search-bar-menu-container
-        div.search-bar-menu
-          div.search-bar-menu-user-infos
-            img(src=`${process.env.IMAGESFOLDER}/default-profile.jpg`)
-            span Username
+
     nav.navbar
       a(
         class=`${currentPage === 'home' || currentPage === 'post-list' ? 'navbar-item active' : 'navbar-item'}`,

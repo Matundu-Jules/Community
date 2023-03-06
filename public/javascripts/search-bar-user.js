@@ -1,4 +1,4 @@
-let menuContainer
+let searchBarMenuContainer
 
 // Don't display search menu when you click anywhere in the window
 window.addEventListener('click', () => {
@@ -29,8 +29,12 @@ window.addEventListener('DOMContentLoaded', () => {
         ref = setTimeout(() => {
             axios
                 .get('/users?search=' + value)
-                .then((response) => console.log(response))
-                .catch((err) => console.log(err))
+                .then((response) => {
+                    searchBarMenuContainer.innerHTML = response.data
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
         }, 2000)
     })
 })
